@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using RankMoviesAPI.Data;
+using RankMoviesAPI.Services;
 
 namespace RankMoviesAPI
 {
@@ -27,6 +28,8 @@ namespace RankMoviesAPI
 
             services.AddSingleton<IRankMoviesAPIDataBaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<RankMoviesAPIDataBaseSettings>>().Value);
+
+            services.AddSingleton<MoviesRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

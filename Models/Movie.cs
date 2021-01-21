@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace RankMoviesAPI.Models
 {
-    public class Book
+    public class Movie
     {
         [BsonId]
         // Allows passing the parameter as type string instead of an ObjectId structure. 
@@ -16,7 +16,7 @@ namespace RankMoviesAPI.Models
 
         public string Director { get; set; }
 
-        public float Rating { get; set; }
+        public double Rating { get; set; }
     }
 
 }
