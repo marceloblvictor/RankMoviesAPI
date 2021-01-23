@@ -21,7 +21,7 @@ namespace RankMoviesAPI.Controllers
         }
 
         // GET: api/Movies
-        [HttpGet]
+        [HttpGet(Name = "GetMovies")]
         public ActionResult<IEnumerable<Movie>> Get()
         {
             var movies = _movies.Get();
@@ -29,8 +29,8 @@ namespace RankMoviesAPI.Controllers
             return movies;
         }
 
-        // GET api/Movies/5        
-        [HttpGet("{id}")]
+        // GET api/Movies/abcd      
+        [HttpGet("{id:length(24)}", Name = "GetMovie")]
         public ActionResult<Movie> Get(string id)
         {
             var movie =  _movies.Get(id);
@@ -45,20 +45,25 @@ namespace RankMoviesAPI.Controllers
 
         // POST api/Movies
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Movie> Post([FromBody] Movie movie)
         {
+            _movies.Create(movie);
+
+            return CreatedAtRoute("GetMovie", new { id = movie.ID.ToString() }, movie);
         }
 
-        // PUT api/Movies/5
-        [HttpPut("{id}")]
+        // PUT api/Movies/abcd
+        [HttpPut("{id:length(24)}")]
         public void Put(string id, [FromBody] string value)
         {
+            ;
         }
 
         // DELETE api/Movies/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:length(24)}")]
         public void Delete(string id)
         {
+            ;
         }
     }
 }
