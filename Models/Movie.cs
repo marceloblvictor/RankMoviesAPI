@@ -15,7 +15,8 @@ namespace RankMoviesAPI.Models
         public string Title { get; set; }
 
         public string Director { get; set; }
-
+        
+        [BsonRepresentation(BsonType.Decimal128)]
         public double Rating { get; set; }
     }
 

@@ -54,16 +54,36 @@ namespace RankMoviesAPI.Controllers
 
         // PUT api/Movies/abcd
         [HttpPut("{id:length(24)}")]
-        public void Put(string id, [FromBody] string value)
+        public IActionResult Put(string id, Movie movieIn)
         {
-            ;
+            var movie = _movies.Get(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            _movies.Update(id, movieIn);
+
+            return RedirectToRoute("GetMovie", new { id = movie.ID.ToString() });
         }
 
         // DELETE api/Movies/5
         [HttpDelete("{id:length(24)}")]
-        public void Delete(string id)
+        public IActionResult Delete(string id)
         {
-            ;
+            var movie = _movies.Get(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            _movies.Remove(movie.ID);
+
+            return RedirectToRoute("GetMovies");
         }
+
+       
     }
 }
